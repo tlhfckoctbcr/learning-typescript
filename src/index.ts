@@ -193,11 +193,10 @@ console.log(right);
 
 class Car {
   name: string;
-  acceleration: number;
+  acceleration: number = 0;
 
-  constructor(name: string, acceleration: number = 0) {
+  constructor(name: string) {
     this.name = name;
-    this.acceleration = acceleration;
   }
 
   honk(): void {
@@ -231,8 +230,8 @@ class Rectangle {
 const rectangle = new Rectangle(10, 25);
 console.log(rectangle.calcSize());
 
-class Person {
-  _firstName: string = "";
+class Fellow {
+  private _firstName: string = "";
 
   get firstName(): string {
     return this._firstName;
@@ -247,9 +246,69 @@ class Person {
   }
 }
 
-let person = new Person();
+let person = new Fellow();
 console.log(person.firstName);
 person.firstName = "Ma";
 console.log(person.firstName);
 person.firstName = "Maximilian";
 console.log(person.firstName);
+
+// Interface
+interface NamedPerson {
+  firstName: string;
+  age?: number; // ? means optional
+  [propName: string]: any; // [...] dynamic property (see "hobbies" array)
+  greet(lastName: string): void;
+}
+
+function greet(person: NamedPerson) {
+  console.log(`Hello ${person.firstName}.`);
+}
+
+function changeName(person: NamedPerson) {
+  person.firstName = "Anna";
+}
+
+class Peep implements NamedPerson {
+  firstName: string;
+  lastName: string;
+  greet(lastName: string): void {
+    console.log(`Sup ${lastName}.`);
+  }
+}
+
+const peep = new Peep();
+
+peep.firstName = "Stuart";
+peep.lastName = "Grant";
+
+greet(peep);
+changeName(peep);
+greet(peep);
+peep.greet("SuP!");
+
+// Function Types
+interface DoubleValueFunc {
+  (number1: number, number2: number): number;
+}
+
+const doubleFunc: DoubleValueFunc = function(value1: number, value2: number) {
+  return value1 + value2;
+};
+
+console.log(doubleFunc(1, 5));
+
+// Now requires the age value
+interface AgedPerson extends NamedPerson {
+  age: number;
+}
+
+const oldPerson: AgedPerson = {
+  age: 100,
+  firstName: "Grandpa",
+  greet(value: string): void {
+    console.log(`${value}. you old geezer.`);
+  }
+};
+
+oldPerson.greet("OH");
