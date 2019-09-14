@@ -312,3 +312,168 @@ const oldPerson: AgedPerson = {
 };
 
 oldPerson.greet("OH");
+
+// Generics
+function echo<T>(data: T) {
+  return data;
+}
+
+const testResults: Array<number> = [1.5, 2.5];
+testResults.push(10);
+console.log(testResults);
+
+// Generic Function
+function printAll<T>(args: T[]) {
+  args.forEach(element => console.log(element));
+}
+
+printAll<string>(["apples", "lemons", "bananas"]);
+
+// Generic Types
+const echo2: <T>(data: T) => T = echo;
+console.log(echo2<string>("something"));
+
+// Generic Classes
+class SimpleMath<base extends number, multiple extends number | string> {
+  base: base;
+  multiple: multiple;
+  calc(): number {
+    return +this.base * +this.multiple;
+  }
+}
+
+const simpleMath = new SimpleMath<number, string>();
+simpleMath.base = 12;
+simpleMath.multiple = "1";
+console.log(simpleMath.calc());
+
+class MyMap<T> {
+  private map: { [key: string]: T } = {};
+
+  setItem(key: string, item: T): void {
+    this.map[key] = item;
+  }
+
+  getItem(key: string) {
+    return this.map[key];
+  }
+
+  clear() {
+    this.map = {};
+  }
+
+  printMap() {
+    for (let key in this.map) {
+      console.log(key, this.map[key]);
+    }
+  }
+}
+
+const numberMap = new MyMap<number>();
+numberMap.setItem("apples", 10);
+numberMap.setItem("bananas", 5);
+numberMap.printMap();
+
+// Decorators
+function logged(constructorFn: Function) {
+  console.log(constructorFn);
+}
+
+@logged
+class DecPerson {
+  constructor() {
+    console.log("HI");
+  }
+}
+
+// Factory
+function logging(value: boolean) {
+  return value ? logged : null;
+}
+
+@logging(true)
+class Vehicle {}
+
+// Adv Decorators
+function printable(constructorFn: Function) {
+  constructorFn.prototype.print = function() {
+    console.log(this);
+  };
+}
+
+@printable
+class Green {
+  name = "Green Plant";
+}
+
+const greeny = new Green();
+(<any>greeny).print();
+
+// Method Decorators
+// Property Decorators
+function editable(value: boolean) {
+  return function(
+    target: any,
+    propName: string,
+    descriptor: PropertyDescriptor
+  ) {
+    descriptor.writable = value;
+  };
+}
+
+function overwritable(value: boolean) {
+  return function(target: any, propName: string): any {
+    const newDescriptor: PropertyDescriptor = {
+      writable: value
+    };
+    return newDescriptor;
+  };
+}
+
+class HotProject {
+  @overwritable(true)
+  projectName: string;
+
+  constructor(name: string) {
+    this.projectName = name;
+  }
+
+  @editable(true)
+  calcBudget() {
+    console.log(1000);
+  }
+}
+
+const hotProject = new HotProject("Super Hot");
+hotProject.calcBudget();
+hotProject.calcBudget = function() {
+  console.log(2000);
+};
+hotProject.calcBudget();
+
+// Parmeter Decorator
+function printInformation(target: any, methodName: string, paramIndex: number) {
+  console.log("target: ", target);
+  console.log("methodName: ", methodName);
+  console.log("paramIndex: ", paramIndex);
+}
+
+class Course {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  printStudentNumbers(mode: string, @printInformation printAll: boolean) {
+    if (printAll) {
+      console.log(10000);
+    } else {
+      console.log(100);
+    }
+  }
+}
+
+const course = new Course("Super");
+course.printStudentNumbers("anything", true);
+course.printStudentNumbers("anything", false);
