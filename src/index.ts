@@ -69,3 +69,187 @@ const myself: Person = {
 
 myself.bankAccount.deposit(3000);
 console.log("MYSELF: ", myself);
+
+function makeArray(...args: number[]) {
+  return args;
+}
+
+console.log(makeArray(1, 2, 3, 5));
+
+function printInfo(name: string, age: number) {
+  console.log(`My name is ${name} and I'm ${number}.`);
+}
+
+function printInfo2(...info: [string, number]) {
+  console.log(`My name is ${info[0]} and I'm ${info[1]}.`);
+}
+
+// Classes in TypeScript
+class Human {
+  private type: string;
+  protected age: number = 31;
+
+  constructor(public name: string, public username: string) {
+    this.name = name;
+  }
+
+  printAge() {
+    console.log(this.age);
+    this.setType("Old Guy");
+  }
+
+  private setType(type: string) {
+    this.type = type;
+    console.log(this.type);
+  }
+}
+
+let human = new Human("John", "johnc");
+human.printAge();
+
+class Superhuman extends Human {
+  constructor(username: string) {
+    super("Max", username);
+    this.age = 40;
+  }
+}
+
+const superhuman = new Superhuman("Stuart");
+console.log(superhuman);
+
+// Getters & Setters
+class Plant {
+  private _species: string = "Default";
+
+  get species() {
+    return this._species;
+  }
+
+  set species(value: string) {
+    if (value.length > 3) {
+      this._species = value;
+    } else {
+      this._species = "Default";
+    }
+  }
+}
+
+let plant = new Plant();
+console.log(plant.species);
+plant.species = "ASD";
+console.log(plant.species);
+
+class Helpers {
+  static pi: number = 3.14;
+  static calcCircumference(diameter: number): number {
+    return this.pi * diameter;
+  }
+}
+
+console.log(Helpers.pi);
+console.log(Helpers.calcCircumference(5));
+
+// Abstract Classes
+abstract class Project {
+  projectName: string = "Default";
+  budget: number = 2000;
+
+  abstract changeName(name: string): void;
+
+  calcBudget() {
+    return this.budget * 2;
+  }
+}
+
+class PersonalProject extends Project {
+  changeName(name: string): void {
+    this.projectName = name;
+  }
+}
+
+let newProject = new PersonalProject();
+console.log(newProject);
+newProject.changeName("Super Project BOY");
+console.log(newProject);
+
+// Private Constructors
+class OnlyOne {
+  private static instance: OnlyOne;
+  private constructor(public readonly name: string, public age: number) {}
+  static getInstance() {
+    if (!OnlyOne.instance) {
+      OnlyOne.instance = new OnlyOne("The Only One", 200);
+    }
+    return OnlyOne.instance;
+  }
+}
+
+let wrong = new OnlyOne("The Only One");
+let right = OnlyOne.getInstance();
+
+console.log(right);
+
+// Exercise 1 - How was your TypeScript Class?
+
+class Car {
+  name: string;
+  acceleration: number;
+
+  constructor(name: string, acceleration: number = 0) {
+    this.name = name;
+    this.acceleration = acceleration;
+  }
+
+  honk(): void {
+    console.log("Toot!");
+  }
+
+  accelerate(speed: number): void {
+    this.acceleration = this.acceleration + speed;
+  }
+}
+
+let car = new Car("Subaru");
+car.honk();
+car.accelerate(10);
+console.log(car);
+
+class Rectangle {
+  width: number = 0;
+  length: number = 0;
+
+  constructor(width: number, length: number) {
+    this.width = width;
+    this.length = length;
+  }
+
+  calcSize(): number {
+    return this.width * this.length;
+  }
+}
+
+const rectangle = new Rectangle(10, 25);
+console.log(rectangle.calcSize());
+
+class Person {
+  _firstName: string = "";
+
+  get firstName(): string {
+    return this._firstName;
+  }
+
+  set firstName(value: string) {
+    if (value.length > 3) {
+      this._firstName = value;
+    } else {
+      this._firstName = "";
+    }
+  }
+}
+
+let person = new Person();
+console.log(person.firstName);
+person.firstName = "Ma";
+console.log(person.firstName);
+person.firstName = "Maximilian";
+console.log(person.firstName);
