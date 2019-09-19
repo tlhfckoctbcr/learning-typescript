@@ -77,7 +77,7 @@ function makeArray(...args: number[]) {
 console.log(makeArray(1, 2, 3, 5));
 
 function printInfo(name: string, age: number) {
-  console.log(`My name is ${name} and I'm ${number}.`);
+  console.log(`My name is ${name} and I'm ${age}.`);
 }
 
 function printInfo2(...info: [string, number]) {

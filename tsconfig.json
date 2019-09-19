@@ -3,7 +3,7 @@
     "module": "commonjs",
     "jsx": "preserve",
     "esModuleInterop": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "allowJs": true,
     "lib": [
       "es6",
@@ -11,6 +11,7 @@
     ],
     "target": "es5",
     "rootDir": "src",
+    "outDir": "build",
     "moduleResolution": "node",
     "experimentalDecorators": true
   }
