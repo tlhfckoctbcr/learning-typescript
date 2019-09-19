@@ -1,453 +1,380 @@
-"use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var _this = this;
-Object.defineProperty(exports, "__esModule", { value: true });
-function returnMyName() {
-    return "Fart";
-}
-console.log(returnMyName());
-function sayHello() {
-    console.log("Hey!");
-}
-function multiply(val1, val2) {
-    return val1 * val2;
-}
-console.log(multiply(1, 2));
-var myMultiply;
-myMultiply = multiply;
-console.log(myMultiply(1, 2));
-var userData = {
-    name: "Stuart",
-    age: 31
-};
-var complex1 = {
-    data: [100, 10, 5],
-    output: function (all) { return _this.data; }
-};
-console.log(complex1);
-// Union Types
-var myRealAge = 27;
-myRealAge = "yes";
-myRealAge = 10;
-console.log(myRealAge);
-var finalValue = 100;
-if (typeof finalValue === "number") {
-    console.log("Final Value is a number");
-}
-// Nullable Types
-var canBeNull = 12;
-canBeNull = null;
-var canAlsoBeNull;
-canAlsoBeNull = null;
-var canThisBeAny = null;
-canThisBeAny = 12;
-var bankAccount = {
-    money: 2000,
-    deposit: function (value) {
-        this.money += value;
-    }
-};
-var myself = {
-    name: "Max",
-    bankAccount: bankAccount,
-    hobbies: ["Sports", "Cooking"]
-};
-myself.bankAccount.deposit(3000);
-console.log("MYSELF: ", myself);
-function makeArray() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    return args;
-}
-console.log(makeArray(1, 2, 3, 5));
-function printInfo(name, age) {
-    console.log("My name is " + name + " and I'm " + number + ".");
-}
-function printInfo2() {
-    var info = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        info[_i] = arguments[_i];
-    }
-    console.log("My name is " + info[0] + " and I'm " + info[1] + ".");
-}
-// Classes in TypeScript
-var Human = /** @class */ (function () {
-    function Human(name, username) {
-        this.name = name;
-        this.username = username;
-        this.age = 31;
-        this.name = name;
-    }
-    Human.prototype.printAge = function () {
-        console.log(this.age);
-        this.setType("Old Guy");
-    };
-    Human.prototype.setType = function (type) {
-        this.type = type;
-        console.log(this.type);
-    };
-    return Human;
-}());
-var human = new Human("John", "johnc");
-human.printAge();
-var Superhuman = /** @class */ (function (_super) {
-    __extends(Superhuman, _super);
-    function Superhuman(username) {
-        var _this = _super.call(this, "Max", username) || this;
-        _this.age = 40;
-        return _this;
-    }
-    return Superhuman;
-}(Human));
-var superhuman = new Superhuman("Stuart");
-console.log(superhuman);
-// Getters & Setters
-var Plant = /** @class */ (function () {
-    function Plant() {
-        this._species = "Default";
-    }
-    Object.defineProperty(Plant.prototype, "species", {
-        get: function () {
-            return this._species;
-        },
-        set: function (value) {
-            if (value.length > 3) {
-                this._species = value;
-            }
-            else {
-                this._species = "Default";
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Plant;
-}());
-var plant = new Plant();
-console.log(plant.species);
-plant.species = "ASD";
-console.log(plant.species);
-var Helpers = /** @class */ (function () {
-    function Helpers() {
-    }
-    Helpers.calcCircumference = function (diameter) {
-        return this.pi * diameter;
-    };
-    Helpers.pi = 3.14;
-    return Helpers;
-}());
-console.log(Helpers.pi);
-console.log(Helpers.calcCircumference(5));
-// Abstract Classes
-var Project = /** @class */ (function () {
-    function Project() {
-        this.projectName = "Default";
-        this.budget = 2000;
-    }
-    Project.prototype.calcBudget = function () {
-        return this.budget * 2;
-    };
-    return Project;
-}());
-var PersonalProject = /** @class */ (function (_super) {
-    __extends(PersonalProject, _super);
-    function PersonalProject() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    PersonalProject.prototype.changeName = function (name) {
-        this.projectName = name;
-    };
-    return PersonalProject;
-}(Project));
-var newProject = new PersonalProject();
-console.log(newProject);
-newProject.changeName("Super Project BOY");
-console.log(newProject);
-// Private Constructors
-var OnlyOne = /** @class */ (function () {
-    function OnlyOne(name, age) {
-        this.name = name;
-        this.age = age;
-    }
-    OnlyOne.getInstance = function () {
-        if (!OnlyOne.instance) {
-            OnlyOne.instance = new OnlyOne("The Only One", 200);
-        }
-        return OnlyOne.instance;
-    };
-    return OnlyOne;
-}());
-var wrong = new OnlyOne("The Only One");
-var right = OnlyOne.getInstance();
-console.log(right);
-// Exercise 1 - How was your TypeScript Class?
-var Car = /** @class */ (function () {
-    function Car(name) {
-        this.acceleration = 0;
-        this.name = name;
-    }
-    Car.prototype.honk = function () {
-        console.log("Toot!");
-    };
-    Car.prototype.accelerate = function (speed) {
-        this.acceleration = this.acceleration + speed;
-    };
-    return Car;
-}());
-var car = new Car("Subaru");
-car.honk();
-car.accelerate(10);
-console.log(car);
-var Rectangle = /** @class */ (function () {
-    function Rectangle(width, length) {
-        this.width = 0;
-        this.length = 0;
-        this.width = width;
-        this.length = length;
-    }
-    Rectangle.prototype.calcSize = function () {
-        return this.width * this.length;
-    };
-    return Rectangle;
-}());
-var rectangle = new Rectangle(10, 25);
-console.log(rectangle.calcSize());
-var Fellow = /** @class */ (function () {
-    function Fellow() {
-        this._firstName = "";
-    }
-    Object.defineProperty(Fellow.prototype, "firstName", {
-        get: function () {
-            return this._firstName;
-        },
-        set: function (value) {
-            if (value.length > 3) {
-                this._firstName = value;
-            }
-            else {
-                this._firstName = "";
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Fellow;
-}());
-var person = new Fellow();
-console.log(person.firstName);
-person.firstName = "Ma";
-console.log(person.firstName);
-person.firstName = "Maximilian";
-console.log(person.firstName);
-function greet(person) {
-    console.log("Hello " + person.firstName + ".");
-}
-function changeName(person) {
-    person.firstName = "Anna";
-}
-var Peep = /** @class */ (function () {
-    function Peep() {
-    }
-    Peep.prototype.greet = function (lastName) {
-        console.log("Sup " + lastName + ".");
-    };
-    return Peep;
-}());
-var peep = new Peep();
-peep.firstName = "Stuart";
-peep.lastName = "Grant";
-greet(peep);
-changeName(peep);
-greet(peep);
-peep.greet("SuP!");
-var doubleFunc = function (value1, value2) {
-    return value1 + value2;
-};
-console.log(doubleFunc(1, 5));
-var oldPerson = {
-    age: 100,
-    firstName: "Grandpa",
-    greet: function (value) {
-        console.log(value + ". you old geezer.");
-    }
-};
-oldPerson.greet("OH");
-// Generics
-function echo(data) {
-    return data;
-}
-var testResults = [1.5, 2.5];
-testResults.push(10);
-console.log(testResults);
-// Generic Function
-function printAll(args) {
-    args.forEach(function (element) { return console.log(element); });
-}
-printAll(["apples", "lemons", "bananas"]);
-// Generic Types
-var echo2 = echo;
-console.log(echo2("something"));
-// Generic Classes
-var SimpleMath = /** @class */ (function () {
-    function SimpleMath() {
-    }
-    SimpleMath.prototype.calc = function () {
-        return +this.base * +this.multiple;
-    };
-    return SimpleMath;
-}());
-var simpleMath = new SimpleMath();
-simpleMath.base = 12;
-simpleMath.multiple = "1";
-console.log(simpleMath.calc());
-var MyMap = /** @class */ (function () {
-    function MyMap() {
-        this.map = {};
-    }
-    MyMap.prototype.setItem = function (key, item) {
-        this.map[key] = item;
-    };
-    MyMap.prototype.getItem = function (key) {
-        return this.map[key];
-    };
-    MyMap.prototype.clear = function () {
-        this.map = {};
-    };
-    MyMap.prototype.printMap = function () {
-        for (var key in this.map) {
-            console.log(key, this.map[key]);
-        }
-    };
-    return MyMap;
-}());
-var numberMap = new MyMap();
-numberMap.setItem("apples", 10);
-numberMap.setItem("bananas", 5);
-numberMap.printMap();
-// Decorators
-function logged(constructorFn) {
-    console.log(constructorFn);
-}
-var DecPerson = /** @class */ (function () {
-    function DecPerson() {
-        console.log("HI");
-    }
-    DecPerson = __decorate([
-        logged
-    ], DecPerson);
-    return DecPerson;
-}());
-// Factory
-function logging(value) {
-    return value ? logged : null;
-}
-var Vehicle = /** @class */ (function () {
-    function Vehicle() {
-    }
-    Vehicle = __decorate([
-        logging(true)
-    ], Vehicle);
-    return Vehicle;
-}());
-// Adv Decorators
-function printable(constructorFn) {
-    constructorFn.prototype.print = function () {
-        console.log(this);
-    };
-}
-var Green = /** @class */ (function () {
-    function Green() {
-        this.name = "Green Plant";
-    }
-    Green = __decorate([
-        printable
-    ], Green);
-    return Green;
-}());
-var greeny = new Green();
-greeny.print();
-// Method Decorators
-// Property Decorators
-function editable(value) {
-    return function (target, propName, descriptor) {
-        descriptor.writable = value;
-    };
-}
-function overwritable(value) {
-    return function (target, propName) {
-        var newDescriptor = {
-            writable: value
-        };
-        return newDescriptor;
-    };
-}
-var HotProject = /** @class */ (function () {
-    function HotProject(name) {
-        this.projectName = name;
-    }
-    HotProject.prototype.calcBudget = function () {
-        console.log(1000);
-    };
-    __decorate([
-        overwritable(true)
-    ], HotProject.prototype, "projectName", void 0);
-    __decorate([
-        editable(true)
-    ], HotProject.prototype, "calcBudget", null);
-    return HotProject;
-}());
-var hotProject = new HotProject("Super Hot");
-hotProject.calcBudget();
-hotProject.calcBudget = function () {
-    console.log(2000);
-};
-hotProject.calcBudget();
-// Parmeter Decorator
-function printInformation(target, methodName, paramIndex) {
-    console.log("target: ", target);
-    console.log("methodName: ", methodName);
-    console.log("paramIndex: ", paramIndex);
-}
-var Course = /** @class */ (function () {
-    function Course(name) {
-        this.name = name;
-    }
-    Course.prototype.printStudentNumbers = function (mode, printAll) {
-        if (printAll) {
-            console.log(10000);
-        }
-        else {
-            console.log(100);
-        }
-    };
-    __decorate([
-        __param(1, printInformation)
-    ], Course.prototype, "printStudentNumbers", null);
-    return Course;
-}());
-var course = new Course("Super");
-course.printStudentNumbers("anything", true);
-course.printStudentNumbers("anything", false);
+// import { Person, BankAccount } from "./index.types";
+// function returnMyName(): string {
+//   return "Fart";
+// }
+// console.log(returnMyName());
+// function sayHello(): void {
+//   console.log("Hey!");
+// }
+// function multiply(val1: number, val2: number): number {
+//   return val1 * val2;
+// }
+// console.log(multiply(1, 2));
+// let myMultiply: (val1: number, val2: number) => number;
+// myMultiply = multiply;
+// console.log(myMultiply(1, 2));
+// let userData: { name: string; age: number } = {
+//   name: "Stuart",
+//   age: 31
+// };
+// // Type Alias
+// type Complex = { data: number[]; output: (all: boolean) => number[] };
+// const complex1: Complex = {
+//   data: [100, 10, 5],
+//   output: (all: boolean): number[] => this.data
+// };
+// console.log(complex1);
+// // Union Types
+// let myRealAge: number | string = 27;
+// myRealAge = "yes";
+// myRealAge = 10;
+// console.log(myRealAge);
+// let finalValue = 100;
+// if (typeof finalValue === "number") {
+//   console.log("Final Value is a number");
+// }
+// // Nullable Types
+// let canBeNull: number | null = 12;
+// canBeNull = null;
+// let canAlsoBeNull;
+// canAlsoBeNull = null;
+// let canThisBeAny: any = null;
+// canThisBeAny = 12;
+// const bankAccount: BankAccount = {
+//   money: 2000,
+//   deposit(value: number): void {
+//     this.money += value;
+//   }
+// };
+// const myself: Person = {
+//   name: "Max",
+//   bankAccount: bankAccount,
+//   hobbies: ["Sports", "Cooking"]
+// };
+// myself.bankAccount.deposit(3000);
+// console.log("MYSELF: ", myself);
+// function makeArray(...args: number[]) {
+//   return args;
+// }
+// console.log(makeArray(1, 2, 3, 5));
+// function printInfo(name: string, age: number) {
+//   console.log(`My name is ${name} and I'm ${age}.`);
+// }
+// function printInfo2(...info: [string, number]) {
+//   console.log(`My name is ${info[0]} and I'm ${info[1]}.`);
+// }
+// // Classes in TypeScript
+// class Human {
+//   private type: string;
+//   protected age: number = 31;
+//   constructor(public name: string, public username: string) {
+//     this.name = name;
+//   }
+//   printAge() {
+//     console.log(this.age);
+//     this.setType("Old Guy");
+//   }
+//   private setType(type: string) {
+//     this.type = type;
+//     console.log(this.type);
+//   }
+// }
+// let human = new Human("John", "johnc");
+// human.printAge();
+// class Superhuman extends Human {
+//   constructor(username: string) {
+//     super("Max", username);
+//     this.age = 40;
+//   }
+// }
+// const superhuman = new Superhuman("Stuart");
+// console.log(superhuman);
+// // Getters & Setters
+// class Plant {
+//   private _species: string = "Default";
+//   get species() {
+//     return this._species;
+//   }
+//   set species(value: string) {
+//     if (value.length > 3) {
+//       this._species = value;
+//     } else {
+//       this._species = "Default";
+//     }
+//   }
+// }
+// let plant = new Plant();
+// console.log(plant.species);
+// plant.species = "ASD";
+// console.log(plant.species);
+// class Helpers {
+//   static pi: number = 3.14;
+//   static calcCircumference(diameter: number): number {
+//     return this.pi * diameter;
+//   }
+// }
+// console.log(Helpers.pi);
+// console.log(Helpers.calcCircumference(5));
+// // Abstract Classes
+// abstract class Project {
+//   projectName: string = "Default";
+//   budget: number = 2000;
+//   abstract changeName(name: string): void;
+//   calcBudget() {
+//     return this.budget * 2;
+//   }
+// }
+// class PersonalProject extends Project {
+//   changeName(name: string): void {
+//     this.projectName = name;
+//   }
+// }
+// let newProject = new PersonalProject();
+// console.log(newProject);
+// newProject.changeName("Super Project BOY");
+// console.log(newProject);
+// // Private Constructors
+// class OnlyOne {
+//   private static instance: OnlyOne;
+//   private constructor(public readonly name: string, public age: number) {}
+//   static getInstance() {
+//     if (!OnlyOne.instance) {
+//       OnlyOne.instance = new OnlyOne("The Only One", 200);
+//     }
+//     return OnlyOne.instance;
+//   }
+// }
+// let wrong = new OnlyOne("The Only One");
+// let right = OnlyOne.getInstance();
+// console.log(right);
+// // Exercise 1 - How was your TypeScript Class?
+// class Car {
+//   name: string;
+//   acceleration: number = 0;
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+//   honk(): void {
+//     console.log("Toot!");
+//   }
+//   accelerate(speed: number): void {
+//     this.acceleration = this.acceleration + speed;
+//   }
+// }
+// let car = new Car("Subaru");
+// car.honk();
+// car.accelerate(10);
+// console.log(car);
+// class Rectangle {
+//   width: number = 0;
+//   length: number = 0;
+//   constructor(width: number, length: number) {
+//     this.width = width;
+//     this.length = length;
+//   }
+//   calcSize(): number {
+//     return this.width * this.length;
+//   }
+// }
+// const rectangle = new Rectangle(10, 25);
+// console.log(rectangle.calcSize());
+// class Fellow {
+//   private _firstName: string = "";
+//   get firstName(): string {
+//     return this._firstName;
+//   }
+//   set firstName(value: string) {
+//     if (value.length > 3) {
+//       this._firstName = value;
+//     } else {
+//       this._firstName = "";
+//     }
+//   }
+// }
+// let person = new Fellow();
+// console.log(person.firstName);
+// person.firstName = "Ma";
+// console.log(person.firstName);
+// person.firstName = "Maximilian";
+// console.log(person.firstName);
+// // Interface
+// interface NamedPerson {
+//   firstName: string;
+//   age?: number; // ? means optional
+//   [propName: string]: any; // [...] dynamic property (see "hobbies" array)
+//   greet(lastName: string): void;
+// }
+// function greet(person: NamedPerson) {
+//   console.log(`Hello ${person.firstName}.`);
+// }
+// function changeName(person: NamedPerson) {
+//   person.firstName = "Anna";
+// }
+// class Peep implements NamedPerson {
+//   firstName: string;
+//   lastName: string;
+//   greet(lastName: string): void {
+//     console.log(`Sup ${lastName}.`);
+//   }
+// }
+// const peep = new Peep();
+// peep.firstName = "Stuart";
+// peep.lastName = "Grant";
+// greet(peep);
+// changeName(peep);
+// greet(peep);
+// peep.greet("SuP!");
+// // Function Types
+// interface DoubleValueFunc {
+//   (number1: number, number2: number): number;
+// }
+// const doubleFunc: DoubleValueFunc = function(value1: number, value2: number) {
+//   return value1 + value2;
+// };
+// console.log(doubleFunc(1, 5));
+// // Now requires the age value
+// interface AgedPerson extends NamedPerson {
+//   age: number;
+// }
+// const oldPerson: AgedPerson = {
+//   age: 100,
+//   firstName: "Grandpa",
+//   greet(value: string): void {
+//     console.log(`${value}. you old geezer.`);
+//   }
+// };
+// oldPerson.greet("OH");
+// // Generics
+// function echo<T>(data: T) {
+//   return data;
+// }
+// const testResults: Array<number> = [1.5, 2.5];
+// testResults.push(10);
+// console.log(testResults);
+// // Generic Function
+// function printAll<T>(args: T[]) {
+//   args.forEach(element => console.log(element));
+// }
+// printAll<string>(["apples", "lemons", "bananas"]);
+// // Generic Types
+// const echo2: <T>(data: T) => T = echo;
+// console.log(echo2<string>("something"));
+// // Generic Classes
+// class SimpleMath<base extends number, multiple extends number | string> {
+//   base: base;
+//   multiple: multiple;
+//   calc(): number {
+//     return +this.base * +this.multiple;
+//   }
+// }
+// const simpleMath = new SimpleMath<number, string>();
+// simpleMath.base = 12;
+// simpleMath.multiple = "1";
+// console.log(simpleMath.calc());
+// class MyMap<T> {
+//   private map: { [key: string]: T } = {};
+//   setItem(key: string, item: T): void {
+//     this.map[key] = item;
+//   }
+//   getItem(key: string) {
+//     return this.map[key];
+//   }
+//   clear() {
+//     this.map = {};
+//   }
+//   printMap() {
+//     for (let key in this.map) {
+//       console.log(key, this.map[key]);
+//     }
+//   }
+// }
+// const numberMap = new MyMap<number>();
+// numberMap.setItem("apples", 10);
+// numberMap.setItem("bananas", 5);
+// numberMap.printMap();
+// // Decorators
+// function logged(constructorFn: Function) {
+//   console.log(constructorFn);
+// }
+// @logged
+// class DecPerson {
+//   constructor() {
+//     console.log("HI");
+//   }
+// }
+// // Factory
+// function logging(value: boolean) {
+//   return value ? logged : null;
+// }
+// @logging(true)
+// class Vehicle {}
+// // Adv Decorators
+// function printable(constructorFn: Function) {
+//   constructorFn.prototype.print = function() {
+//     console.log(this);
+//   };
+// }
+// @printable
+// class Green {
+//   name = "Green Plant";
+// }
+// const greeny = new Green();
+// (<any>greeny).print();
+// // Method Decorators
+// // Property Decorators
+// function editable(value: boolean) {
+//   return function(
+//     target: any,
+//     propName: string,
+//     descriptor: PropertyDescriptor
+//   ) {
+//     descriptor.writable = value;
+//   };
+// }
+// function overwritable(value: boolean) {
+//   return function(target: any, propName: string): any {
+//     const newDescriptor: PropertyDescriptor = {
+//       writable: value
+//     };
+//     return newDescriptor;
+//   };
+// }
+// class HotProject {
+//   @overwritable(true)
+//   projectName: string;
+//   constructor(name: string) {
+//     this.projectName = name;
+//   }
+//   @editable(true)
+//   calcBudget() {
+//     console.log(1000);
+//   }
+// }
+// const hotProject = new HotProject("Super Hot");
+// hotProject.calcBudget();
+// hotProject.calcBudget = function() {
+//   console.log(2000);
+// };
+// hotProject.calcBudget();
+// // Parmeter Decorator
+// function printInformation(target: any, methodName: string, paramIndex: number) {
+//   console.log("target: ", target);
+//   console.log("methodName: ", methodName);
+//   console.log("paramIndex: ", paramIndex);
+// }
+// class Course {
+//   name: string;
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+//   printStudentNumbers(mode: string, @printInformation printAll: boolean) {
+//     if (printAll) {
+//       console.log(10000);
+//     } else {
+//       console.log(100);
+//     }
+//   }
+// }
+// const course = new Course("Super");
+// course.printStudentNumbers("anything", true);
+// course.printStudentNumbers("anything", false);

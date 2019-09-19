@@ -1,2 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// export type BankAccount = {
+//   money: number;
+//   deposit: (value: number) => void;
+// };
+// export type Person = {
+//   name: string;
+//   bankAccount: BankAccount;
+//   hobbies: string[];
+// };
