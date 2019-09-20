@@ -1,7 +1,7 @@
 // import { Person, BankAccount } from "./index.types";
 
 // function returnMyName(): string {
-//   return "Fart";
+//   return "Stu";
 // }
 
 // console.log(returnMyName());

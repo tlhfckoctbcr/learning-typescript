@@ -78,6 +78,30 @@ let boss = new Manager('Big Boss');
 boss.instructPeons();
 boss.greet();
 
+// Setters/Getters
+class Fellow {
+  private _firstName: string = "";
+
+  get firstName(): string {
+    return this._firstName;
+  }
+
+  set firstName(value: string) {
+    if (value.length > 3) {
+      this._firstName = value;
+    } else {
+      this._firstName = "";
+    }
+  }
+}
+
+let fellowMan = new Fellow();
+console.log(fellowMan.firstName);
+fellowMan.firstName = "St";
+console.log(fellowMan.firstName);
+fellowMan.firstName = "Stuart";
+console.log(fellowMan.firstName);
+
 // Generics
 /* Defines relationship between input and output param types
 ** Stronger type checking at compile time */
